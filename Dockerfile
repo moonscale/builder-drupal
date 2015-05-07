@@ -15,6 +15,10 @@ RUN cd /usr/local && git clone http://github.com/drush-ops/drush && cd drush && 
 
 RUN ln -s /usr/local/drush/drush /usr/local/bin/drush
 
+RUN pear install PHP_CodeSniffer
+
+RUN composer global require drupal/coder && phpcs --config-set installed_paths /root/.composer/vendor/drupal/coder/coder_sniffer
+
 RUN echo "date.timezone = UTC" > /usr/local/etc/php/conf.d/date.ini
 
 RUN echo "user0:x:1000:1000:User 0:/tmp:/bin/false" >> /etc/passwd && \
